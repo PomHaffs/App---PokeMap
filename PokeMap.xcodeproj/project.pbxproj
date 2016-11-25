@@ -19,6 +19,7 @@
 		FE6275BF1DE7A7CF00AF6AEB /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6275B81DE7A7CF00AF6AEB /* GFGeoHash.m */; };
 		FE6275C01DE7A7CF00AF6AEB /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6275BA1DE7A7CF00AF6AEB /* GFGeoHashQuery.m */; };
 		FE6275C11DE7A7CF00AF6AEB /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FE6275BC1DE7A7CF00AF6AEB /* GFQuery.m */; };
+		FE6275CB1DE7CE0200AF6AEB /* PokeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6275CA1DE7CE0200AF6AEB /* PokeAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		FE6275BB1DE7A7CF00AF6AEB /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
 		FE6275BC1DE7A7CF00AF6AEB /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		FE6275C71DE7AACF00AF6AEB /* PokeMap-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PokeMap-Bridging-Header.h"; sourceTree = "<group>"; };
+		FE6275CA1DE7CE0200AF6AEB /* PokeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokeAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,15 +103,16 @@
 		FE6275961DE7A2E600AF6AEB /* PokeMap */ = {
 			isa = PBXGroup;
 			children = (
+				FE6275C91DE7CD8400AF6AEB /* Model */,
+				FE6275C81DE7CD7C00AF6AEB /* Controller */,
 				FE6275AB1DE7A7CF00AF6AEB /* GeoFire */,
 				FE6275971DE7A2E600AF6AEB /* AppDelegate.swift */,
-				FE6275991DE7A2E600AF6AEB /* ViewController.swift */,
-				FE62759B1DE7A2E600AF6AEB /* Main.storyboard */,
+				FE6275C71DE7AACF00AF6AEB /* PokeMap-Bridging-Header.h */,
+				FE6275A91DE7A36900AF6AEB /* GoogleService-Info.plist */,
+				FE6275A31DE7A2E600AF6AEB /* Info.plist */,
 				FE62759E1DE7A2E600AF6AEB /* Assets.xcassets */,
 				FE6275A01DE7A2E600AF6AEB /* LaunchScreen.storyboard */,
-				FE6275A31DE7A2E600AF6AEB /* Info.plist */,
-				FE6275A91DE7A36900AF6AEB /* GoogleService-Info.plist */,
-				FE6275C71DE7AACF00AF6AEB /* PokeMap-Bridging-Header.h */,
+				FE62759B1DE7A2E600AF6AEB /* Main.storyboard */,
 			);
 			path = PokeMap;
 			sourceTree = "<group>";
@@ -150,6 +153,22 @@
 				FE6275BC1DE7A7CF00AF6AEB /* GFQuery.m */,
 			);
 			path = Implementation;
+			sourceTree = "<group>";
+		};
+		FE6275C81DE7CD7C00AF6AEB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FE6275991DE7A2E600AF6AEB /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		FE6275C91DE7CD8400AF6AEB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FE6275CA1DE7CE0200AF6AEB /* PokeAnnotation.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FE6275BE1DE7A7CF00AF6AEB /* GFBase32Utils.m in Sources */,
+				FE6275CB1DE7CE0200AF6AEB /* PokeAnnotation.swift in Sources */,
 				FE62759A1DE7A2E600AF6AEB /* ViewController.swift in Sources */,
 				FE6275BF1DE7A7CF00AF6AEB /* GFGeoHash.m in Sources */,
 				FE6275981DE7A2E600AF6AEB /* AppDelegate.swift in Sources */,
