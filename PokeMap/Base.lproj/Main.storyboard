@@ -36,19 +36,29 @@
                                     <action selector="SpotRandomPokemon:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Thn-by-6w6"/>
                                 </connections>
                             </button>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlL-54-ChG">
+                                <rect key="frame" x="139" y="497" width="220" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="1R5-sJ-3Es"/>
+                                    <constraint firstAttribute="width" constant="220" id="4Ri-uY-JgW"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="um2-nC-Ow5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="67j-cA-Sb7"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ylt-cz-xUM" secondAttribute="bottom" constant="10" id="B6Q-gm-PyL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="um2-nC-Ow5" secondAttribute="bottom" id="GxF-gY-2Fy"/>
+                            <constraint firstItem="wlL-54-ChG" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="KQF-Xx-xBA"/>
                             <constraint firstAttribute="trailing" secondItem="um2-nC-Ow5" secondAttribute="trailing" id="M3u-I3-Ndj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wlL-54-ChG" secondAttribute="bottom" constant="20" id="ccp-4E-c22"/>
                             <constraint firstItem="um2-nC-Ow5" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="n9W-VY-LMg"/>
                             <constraint firstItem="ylt-cz-xUM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="qfd-Y1-jO8"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="mapView" destination="um2-nC-Ow5" id="92w-tX-FTG"/>
+                        <outlet property="pokePicker" destination="wlL-54-ChG" id="N0x-yl-ZpX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

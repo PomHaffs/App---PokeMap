@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import FirebaseDatabase
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -28,9 +28,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         mapView.delegate = self
         mapView.userTrackingMode = MKUserTrackingMode.follow
         
-        //This links to
+//This links to GeoFire etc...
         geoFireRef = FIRDatabase.database().reference()
         geoFire = GeoFire(firebaseRef: geoFireRef)
+
+//ADDED for picker view
+        pokePicker.dataSource = self
+        pokePicker.delegate = self
         
     }
     
@@ -154,21 +158,46 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
 
-    //CHANGE WHEN DOING EXTRA
+//CHANGES added IBoutlet fo picker
     @IBAction func SpotRandomPokemon(_ sender: Any) {
-        
-        let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-        
-        let rand = arc4random_uniform(151) + 1
-        
-        createSighting(forLocation: loc, withPokemon: Int(rand))
-        
+        pokePicker.isHidden = false
+ 
+        //MOVED to below function in a effort to finished task.
+//        let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+//        
+//        let rand = arc4random_uniform(151) + 1
+//        
+//        createSighting(forLocation: loc, withPokemon: Int(rand))
         
     }
     
+//ADDED to link picker view
+    @IBOutlet weak var pokePicker: UIPickerView!
     
+//ADDED to adhire to requirements of UIPickerViewDataSource and Delegate
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pokemon.count
+    }
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pokemon[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        
+        let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        
+        let pokeIndex = pokemon.index(of: "\(pokemon[row])")
+        
+        createSighting(forLocation: loc, withPokemon: pokeIndex!)
+        
+        pokePicker.isHidden = true
+    }
     
 }
 
