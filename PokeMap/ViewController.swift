@@ -19,7 +19,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var geoFire: GeoFire!
     var geoFireRef: FIRDatabaseReference!
 
-//USe this to ensure map will only cente when requested not every update
+//Use this to ensure map will only cente when requested not every update
     var mapHasCenteredOnce = false
     
     override func viewDidLoad() {
@@ -77,10 +77,32 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         var annotationView: MKAnnotationView?
+//need this for dequeue below
+        let annoIdentifier = "Pokemon"
         
         if annotation.isKind(of: MKUserLocation.self) {
             annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "User")
             annotationView?.image = UIImage(named: "ash")
+        } else if let deqAnno = mapView.dequeueReusableAnnotationView(withIdentifier: annoIdentifier) {
+            annotationView = deqAnno
+            annotationView?.annotation = annotation
+        } else {
+            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
+            av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView = av
+        }
+        
+        if let annotationView = annotationView, let anno = annotation as? PokeAnnotation {
+         
+//this is linked to self.title in pokeAnnotation and will not work without title being declared
+            annotationView.canShowCallout = true
+            annotationView.image = UIImage(named: "\(anno.pokemonNumber)")
+            
+            let btn = UIButton()
+            btn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            btn.setImage(UIImage(named: "map"), for: .normal)
+            annotationView.rightCalloutAccessoryView = btn
+        
         }
         
         return annotationView
@@ -106,8 +128,33 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             }
         })
     }
+ 
+//This is showing the Pokemon on the map
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        
+        let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+        
+        showSightingsOnMap(location: loc)
+    }
+   
+//allow for travel directions to be linked - placemarking for start and end are required.
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        if let anno = view.annotation as? PokeAnnotation {
+            let place = MKPlacemark(coordinate: anno.coordinate)
+            let destination = MKMapItem(placemark: place)
+            destination.name = "Pokemon Sighting"
+            let regionDistance: CLLocationDistance = 1000
+            let regionSpan = MKCoordinateRegionMakeWithDistance(anno.coordinate, regionDistance, regionDistance)
+            
+            let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center), MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span), MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking] as [String : Any]
+            
+            MKMapItem.openMaps(with: [destination], launchOptions: options)
+        }
+    }
+    
 
-    //CHANGE ME WHEN DOING EXTRA
+    //CHANGE WHEN DOING EXTRA
     @IBAction func SpotRandomPokemon(_ sender: Any) {
         
         let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
