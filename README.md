@@ -9,9 +9,10 @@ PokeMap full stack application - location finder using geolocation, allowing use
 - MapKit
 
 ##What I leaned:
-Integration of GPS
-Saving data to Firebase
-Linking to AppleMaps for directions
-Linking header fro Obj-C to SWift 3
+- Integration of GPS
+- Saving data to Firebase
+- Linking to AppleMaps for directions
+- Linking header fro Obj-C to Swift 3
+- p.List allowences 
 
 
