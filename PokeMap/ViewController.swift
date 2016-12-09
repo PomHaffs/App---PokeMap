@@ -192,7 +192,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         
         let loc = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
         
-        let pokeIndex = pokemon.index(of: "\(pokemon[row])")
+        var pokeIndex = pokemon.index(of: "\(pokemon[row])")
+        pokeIndex = Int(pokeIndex!) + 1
         
         createSighting(forLocation: loc, withPokemon: pokeIndex!)
         
